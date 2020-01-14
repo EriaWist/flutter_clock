@@ -171,7 +171,7 @@ class _AnalogClockState extends State<AnalogClock> {
                 turns: _now.second * radiansPerTick,
                 speed: 10000,
                 child: Image(
-                  image: AssetImage("../images/record_2.png"),
+                  image: AssetImage("../images/record_light.png"),
                 ),
               ),
             ),
