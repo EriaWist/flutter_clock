@@ -46,8 +46,8 @@ class _AnalogClockState extends State<AnalogClock> {
   _getContainerSize() {
     RenderBox _recordPlayerSizeBox =
         _recordPlayerSizeKey.currentContext.findRenderObject();
-    recordPlayerSize = _recordPlayerSizeBox.size;
     print('$recordPlayerSize'); /////////////////
+    recordPlayerSize = _recordPlayerSizeBox.size;
     setState(() {});
   }
 
@@ -109,7 +109,6 @@ class _AnalogClockState extends State<AnalogClock> {
     //  - Create your own [ThemeData], demonstrated in [AnalogClock].
     //  - Create a map of [Color]s to custom keys, demonstrated in
     //    [DigitalClock].
-
     final customTheme = Theme.of(context).brightness == Brightness.light
         ? Theme.of(context).copyWith(
             // Hour hand.
@@ -154,77 +153,69 @@ class _AnalogClockState extends State<AnalogClock> {
             Image(
               image: AssetImage("../images/background_light.png"),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: recordPlayerSize.height * 0.05,
-                  horizontal: recordPlayerSize.height * 0.1),
-              //開模擬器要先註解
-              child: Row(
-                children: <Widget>[
-                  Stack(
-                    alignment: AlignmentDirectional.topEnd,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Container(
-                            height: recordPlayerSize.height * 0.8,
-                            //開模擬器要先註解
-                            child: TurnBox(
-                              turns: _now.second * radiansPerTick,
-                              speed: 10000,
-                              child: Image(
-                                image: AssetImage("../images/record_2.png"),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: recordPlayerSize.height * 0.1,
-                            //開模擬器要先註解
-                          ),
-                        ],
-                      ),
-                      Image.asset(
-                        "../images/Tonearm.png",
-                        height: recordPlayerSize.height * 0.8,
-                        //開模擬器要先註解
-                      ),
-                      Text('$recordPlayerSize'), ////////////////////
-                      Text('\n' +
-                          MediaQuery.of(context).size.toString()), ///////////
-                    ],
+            Stack(
+              children: <Widget>[
+                Positioned(
+                  left: recordPlayerSize.height * 0.08,
+                  top: recordPlayerSize.height * 0.1,
+                  height: recordPlayerSize.height * 0.8,
+                  child: Image(
+                    image: AssetImage("../images/record_shadow.png"),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        child: Image.asset(
-                          "../images/knob.png",
-                          height: 50,
+                ),
+                Positioned(
+                  left: recordPlayerSize.height * 0.05,
+                  top: recordPlayerSize.height * 0.1,
+                  height: recordPlayerSize.height * 0.8,
+                  child: TurnBox(
+                    turns: _now.second * radiansPerTick,
+                    speed: 10000,
+                    child: Image(
+                      image: AssetImage("../images/record_2.png"),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: recordPlayerSize.height * 0.65,
+                  top: recordPlayerSize.height * 0.05,
+                  height: recordPlayerSize.height * 0.7,
+                  child: Image.asset(
+                    "../images/Tonearm.png",
+                  ),
+                ),
+                Text('$recordPlayerSize'), ////////////////////
+                Text('\n' + MediaQuery.of(context).size.toString()), ///////////
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child: Image.asset(
+                        "../images/knob.png",
+                        height: 50,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Image.asset(
+                          "../images/track.png",
+                          height: 120,
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Image.asset(
-                            "../images/track.png",
-                            height: 120,
-                          ),
-                          Image.asset(
-                            "../images/track.png",
-                            height: 120,
-                          ),
-                          Image.asset(
-                            "../images/track.png",
-                            height: 120,
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                        Image.asset(
+                          "../images/track.png",
+                          height: 120,
+                        ),
+                        Image.asset(
+                          "../images/track.png",
+                          height: 120,
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
             ),
 
             // Example of a hand drawn with [CustomPainter].
