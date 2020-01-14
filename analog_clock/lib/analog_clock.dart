@@ -220,68 +220,95 @@ class _AnalogClockState extends State<AnalogClock> {
             Positioned(
               //拉桿
               left: recordPlayerSize.width * 0.7,
-              top: recordPlayerSize.height * 0.4,
+              top: recordPlayerSize.height * 0.35,
               width: recordPlayerSize.width * 0.2,
+              height: recordPlayerSize.height * 0.6,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Image.asset(
-                    "../images/track.png",
-                    height: recordPlayerSize.height * 0.5,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Image.asset(
+                        "../images/print.png",
+                        height: recordPlayerSize.height * 0.08,
+                      ),
+                      Image.asset(
+                        "../images/track.png",
+                        height: recordPlayerSize.height * 0.5,
+                      ),
+                    ],
                   ),
-                  Image.asset(
-                    "../images/track.png",
-                    height: recordPlayerSize.height * 0.5,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Image.asset(
+                        "../images/print.png",
+                        height: recordPlayerSize.height * 0.08,
+                      ),
+                      Image.asset(
+                        "../images/track.png",
+                        height: recordPlayerSize.height * 0.5,
+                      ),
+                    ],
                   ),
-                  Image.asset(
-                    "../images/track.png",
-                    height: recordPlayerSize.height * 0.5,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Image.asset(
+                        "../images/print.png",
+                        height: recordPlayerSize.height * 0.08,
+                      ),
+                      Image.asset(
+                        "../images/track.png",
+                        height: recordPlayerSize.height * 0.5,
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-
-            // Example of a hand drawn with [CustomPainter].
-            // DrawnHand(
-            //   color: customTheme.accentColor,
-            //   thickness: 4,
-            //   size: 1,
-            //   angleRadians: _now.second * radiansPerTick,
-            // ),
-            // DrawnHand(
-            //   color: customTheme.highlightColor,
-            //   thickness: 16,
-            //   size: 0.9,
-            //   angleRadians: _now.minute * radiansPerTick,
-            // ),
-            // // Example of a hand drawn with [Container].
-            // ContainerHand(
-            //   color: Colors.transparent,
-            //   size: 0.5,
-            //   angleRadians: _now.hour * radiansPerHour +
-            //       (_now.minute / 60) * radiansPerHour,
-            //   child: Transform.translate(
-            //     offset: Offset(0.0, -60.0),
-            //     child: Container(
-            //       width: 32,
-            //       height: 150,
-            //       decoration: BoxDecoration(
-            //         color: customTheme.primaryColor,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // Positioned(
-            //   left: 0,
-            //   bottom: 0,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(8),
-            //     child: weatherInfo,
-            //   ),
-            // ),
           ],
         ),
       ),
     );
   }
 }
+// Example of a hand drawn with [CustomPainter].
+// DrawnHand(
+//   color: customTheme.accentColor,
+//   thickness: 4,
+//   size: 1,
+//   angleRadians: _now.second * radiansPerTick,
+// ),
+// DrawnHand(
+//   color: customTheme.highlightColor,
+//   thickness: 16,
+//   size: 0.9,
+//   angleRadians: _now.minute * radiansPerTick,
+// ),
+// // Example of a hand drawn with [Container].
+// ContainerHand(
+//   color: Colors.transparent,
+//   size: 0.5,
+//   angleRadians: _now.hour * radiansPerHour +
+//       (_now.minute / 60) * radiansPerHour,
+//   child: Transform.translate(
+//     offset: Offset(0.0, -60.0),
+//     child: Container(
+//       width: 32,
+//       height: 150,
+//       decoration: BoxDecoration(
+//         color: customTheme.primaryColor,
+//       ),
+//     ),
+//   ),
+// ),
+// Positioned(
+//   left: 0,
+//   bottom: 0,
+//   child: Padding(
+//     padding: const EdgeInsets.all(8),
+//     child: weatherInfo,
+//   ),
+// ),
