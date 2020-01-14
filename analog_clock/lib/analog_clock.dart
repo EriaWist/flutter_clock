@@ -135,7 +135,6 @@ class _AnalogClockState extends State<AnalogClock> {
         value: time,
       ),
       child: Container(
-        color: Colors.transparent,
         child: Stack(
           children: [
             // Image(
@@ -184,15 +183,16 @@ class _AnalogClockState extends State<AnalogClock> {
                             ),
                           ),
                           SleekCircularSlider(
-                            initialValue: 0,
+                            initialValue: _now.second.toDouble(),
                             appearance: CircularSliderAppearance(
-                              angleRange: 359,
+                              angleRange: 240,
                               startAngle: 270,
                               size: 50,
                               infoProperties: InfoProperties(),
                             ),
                             onChange: (double value) {
                               kedovalue = value.toInt();
+                              setState(() {});
                               print(kedovalue);
                             },
                           ),
