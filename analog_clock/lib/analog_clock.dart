@@ -192,6 +192,7 @@ class _AnalogClockState extends State<AnalogClock> {
               top: recordPlayerSize.height * 0.05,
               height: recordPlayerSize.height * 0.25,
               child: Stack(
+                alignment: AlignmentDirectional.topStart,
                 children: <Widget>[
                   TurnBox(
                     turns: kedovalue / 100,
@@ -205,6 +206,7 @@ class _AnalogClockState extends State<AnalogClock> {
                     appearance: CircularSliderAppearance(
                       angleRange: 240,
                       startAngle: 270,
+                      size: recordPlayerSize.height * 0.25,
                       infoProperties: InfoProperties(),
                     ),
                     onChange: (double value) {
