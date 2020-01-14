@@ -47,7 +47,7 @@ class _AnalogClockState extends State<AnalogClock> {
     RenderBox _recordPlayerSizeBox =
         _recordPlayerSizeKey.currentContext.findRenderObject();
     recordPlayerSize = _recordPlayerSizeBox.size;
-    print('$recordPlayerSize'); ///////////////////
+    print('$recordPlayerSize'); /////////////////
     setState(() {});
   }
 
