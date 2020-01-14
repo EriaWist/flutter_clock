@@ -231,9 +231,17 @@ class _AnalogClockState extends State<AnalogClock> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Image.asset(
-                        "../images/print.png",
+                      Container(
                         height: recordPlayerSize.height * 0.08,
+                        width: recordPlayerSize.height * 0.1,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("../images/print.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Text("20"),
                       ),
                       Image.asset(
                         "../images/track.png",
@@ -244,9 +252,26 @@ class _AnalogClockState extends State<AnalogClock> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Image.asset(
-                        "../images/print.png",
+                      // Stack(
+                      //   children: <Widget>[
+                      //     Image.asset(
+                      //       "../images/print.png",
+                      //       height: recordPlayerSize.height * 0.08,
+                      //     ),
+                      //     Text("01"),
+                      //   ],
+                      // ),
+                      Container(
                         height: recordPlayerSize.height * 0.08,
+                        width: recordPlayerSize.height * 0.1,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("../images/print.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Text("01"),
                       ),
                       Image.asset(
                         "../images/track.png",
@@ -257,9 +282,17 @@ class _AnalogClockState extends State<AnalogClock> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Image.asset(
-                        "../images/print.png",
+                      Container(
                         height: recordPlayerSize.height * 0.08,
+                        width: recordPlayerSize.height * 0.1,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("../images/print.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Text("15"),
                       ),
                       Image.asset(
                         "../images/track.png",
