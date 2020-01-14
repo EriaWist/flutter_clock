@@ -79,7 +79,7 @@ packages:
   flutter_clock_helper:
     dependency: "direct main"
     description:
-      path: "../flutter_clock_helper"
+      path: "..\\flutter_clock_helper"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -149,6 +149,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sleek_circular_slider:
+    dependency: "direct main"
+    description:
+      name: sleek_circular_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.7"
   source_span:
     dependency: transitive
     description:
