@@ -22,7 +22,7 @@ flutter:
     - family: PressStart2P
       fonts:
         - asset: third_party/PressStart2P-Regular.ttf
-    - family: PressStart2P
+    - family: CuteFont
       fonts:
         - asset: ../fonts/CuteFont-Regular.ttf
   assets:

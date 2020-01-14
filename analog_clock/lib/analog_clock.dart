@@ -109,6 +109,11 @@ class _AnalogClockState extends State<AnalogClock> {
     //    [DigitalClock].
     WidgetsBinding.instance.addPostFrameCallback((_) => _getContainerSize());
 
+    final hour =
+        DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_now);
+    final minute = DateFormat('mm').format(_now);
+    final fontSize = recordPlayerSize.width * 0.1;
+
     final customTheme = Theme.of(context).brightness == Brightness.light
         ? Theme.of(context).copyWith(
             // Hour hand.
@@ -172,6 +177,24 @@ class _AnalogClockState extends State<AnalogClock> {
                 speed: 10000,
                 child: Image(
                   image: AssetImage("../images/record_light.png"),
+                ),
+              ),
+            ),
+            Positioned(
+              left: recordPlayerSize.width * 0.15,
+              top: recordPlayerSize.height * 0.4,
+              child: Text(
+                '$hour : $minute',
+                style: TextStyle(
+                  fontFamily: 'CuteFont',
+                  fontSize: recordPlayerSize.height * 0.15,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 0,
+                      color: Colors.grey,
+                      offset: Offset(5, 0),
+                    ),
+                  ],
                 ),
               ),
             ),
