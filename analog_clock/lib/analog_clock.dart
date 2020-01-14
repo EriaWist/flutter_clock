@@ -109,6 +109,8 @@ class _AnalogClockState extends State<AnalogClock> {
     //  - Create your own [ThemeData], demonstrated in [AnalogClock].
     //  - Create a map of [Color]s to custom keys, demonstrated in
     //    [DigitalClock].
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getContainerSize());
+
     final customTheme = Theme.of(context).brightness == Brightness.light
         ? Theme.of(context).copyWith(
             // Hour hand.
@@ -153,69 +155,71 @@ class _AnalogClockState extends State<AnalogClock> {
             Image(
               image: AssetImage("../images/background_light.png"),
             ),
-            Stack(
-              children: <Widget>[
-                Positioned(
-                  left: recordPlayerSize.height * 0.08,
-                  top: recordPlayerSize.height * 0.1,
-                  height: recordPlayerSize.height * 0.8,
-                  child: Image(
-                    image: AssetImage("../images/record_shadow.png"),
-                  ),
+            Positioned(
+              //唱片陰影
+              left: recordPlayerSize.width * 0.07,
+              top: recordPlayerSize.height * 0.1,
+              height: recordPlayerSize.height * 0.8,
+              child: Image(
+                image: AssetImage("../images/record_shadow.png"),
+              ),
+            ),
+            Positioned(
+              //唱片
+              left: recordPlayerSize.width * 0.05,
+              top: recordPlayerSize.height * 0.1,
+              height: recordPlayerSize.height * 0.8,
+              child: TurnBox(
+                turns: _now.second * radiansPerTick,
+                speed: 10000,
+                child: Image(
+                  image: AssetImage("../images/record_2.png"),
                 ),
-                Positioned(
-                  left: recordPlayerSize.height * 0.05,
-                  top: recordPlayerSize.height * 0.1,
-                  height: recordPlayerSize.height * 0.8,
-                  child: TurnBox(
-                    turns: _now.second * radiansPerTick,
-                    speed: 10000,
-                    child: Image(
-                      image: AssetImage("../images/record_2.png"),
-                    ),
+              ),
+            ),
+            Positioned(
+              //指針
+              left: recordPlayerSize.width * 0.4,
+              top: recordPlayerSize.height * 0.05,
+              height: recordPlayerSize.height * 0.75,
+              child: Image.asset(
+                "../images/Tonearm.png",
+              ),
+            ),
+            Text('$recordPlayerSize'), ////////////////////
+            Text('\n' + MediaQuery.of(context).size.toString()), ///////////
+            Positioned(
+              //旋鈕
+              left: recordPlayerSize.width * 0.73,
+              top: recordPlayerSize.height * 0.05,
+              height: recordPlayerSize.height * 0.25,
+              child: Image.asset(
+                "../images/knob.png",
+                // height: 50,
+              ),
+            ),
+            Positioned(
+              //拉桿
+              left: recordPlayerSize.width * 0.7,
+              top: recordPlayerSize.height * 0.4,
+              width: recordPlayerSize.width * 0.2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Image.asset(
+                    "../images/track.png",
+                    height: recordPlayerSize.height * 0.5,
                   ),
-                ),
-                Positioned(
-                  left: recordPlayerSize.height * 0.65,
-                  top: recordPlayerSize.height * 0.05,
-                  height: recordPlayerSize.height * 0.7,
-                  child: Image.asset(
-                    "../images/Tonearm.png",
+                  Image.asset(
+                    "../images/track.png",
+                    height: recordPlayerSize.height * 0.5,
                   ),
-                ),
-                Text('$recordPlayerSize'), ////////////////////
-                Text('\n' + MediaQuery.of(context).size.toString()), ///////////
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: Image.asset(
-                        "../images/knob.png",
-                        height: 50,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "../images/track.png",
-                          height: 120,
-                        ),
-                        Image.asset(
-                          "../images/track.png",
-                          height: 120,
-                        ),
-                        Image.asset(
-                          "../images/track.png",
-                          height: 120,
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
+                  Image.asset(
+                    "../images/track.png",
+                    height: recordPlayerSize.height * 0.5,
+                  ),
+                ],
+              ),
             ),
 
             // Example of a hand drawn with [CustomPainter].
