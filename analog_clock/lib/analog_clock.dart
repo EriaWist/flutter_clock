@@ -40,7 +40,7 @@ class _AnalogClockState extends State<AnalogClock> {
   var _location = '';
   Timer _timer;
 
-  Size recordPlayerSize;
+  Size recordPlayerSize = Size(0, 0);
   GlobalKey _recordPlayerSizeKey = GlobalKey();
 
   _getContainerSize() {
@@ -109,7 +109,6 @@ class _AnalogClockState extends State<AnalogClock> {
     //  - Create your own [ThemeData], demonstrated in [AnalogClock].
     //  - Create a map of [Color]s to custom keys, demonstrated in
     //    [DigitalClock].
-    _getContainerSize(); //
 
     final customTheme = Theme.of(context).brightness == Brightness.light
         ? Theme.of(context).copyWith(
@@ -227,6 +226,7 @@ class _AnalogClockState extends State<AnalogClock> {
                 ],
               ),
             ),
+
             // Example of a hand drawn with [CustomPainter].
             // DrawnHand(
             //   color: customTheme.accentColor,
