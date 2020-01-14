@@ -1,7 +1,3 @@
-// Copyright 2019 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:async';
 
 import 'package:flutter_clock_helper/model.dart';
@@ -41,6 +37,17 @@ class _AnalogClockState extends State<AnalogClock> {
   var _location = '';
   Timer _timer;
 
+  Size recordPlayerSize = Size(0, 0);
+  GlobalKey _recordPlayerSizeKey = GlobalKey();
+
+  _getContainerSize() {
+    RenderBox _recordPlayerSizeBox =
+        _recordPlayerSizeKey.currentContext.findRenderObject();
+    print('$recordPlayerSize'); /////////////////
+    recordPlayerSize = _recordPlayerSizeBox.size;
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,6 +56,8 @@ class _AnalogClockState extends State<AnalogClock> {
 
     _updateTime();
     _updateModel();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getContainerSize());
   }
 
   @override
@@ -98,6 +107,8 @@ class _AnalogClockState extends State<AnalogClock> {
     //  - Create your own [ThemeData], demonstrated in [AnalogClock].
     //  - Create a map of [Color]s to custom keys, demonstrated in
     //    [DigitalClock].
+    WidgetsBinding.instance.addPostFrameCallback((_) => _getContainerSize());
+
     final customTheme = Theme.of(context).brightness == Brightness.light
         ? Theme.of(context).copyWith(
             // Hour hand.
@@ -135,94 +146,101 @@ class _AnalogClockState extends State<AnalogClock> {
         value: time,
       ),
       child: Container(
+        key: _recordPlayerSizeKey,
+        color: Colors.transparent,
         child: Stack(
           children: [
-            // Image(
-            //   image: AssetImage("../images/record_2.png"),
-            // ),
             Image(
               image: AssetImage("../images/background_light.png"),
             ),
-            Row(
-              children: <Widget>[
-                Stack(
-                  alignment: AlignmentDirectional.topEnd,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.all(30),
-                      child: TurnBox(
-                        turns: _now.second * radiansPerTick,
-                        speed: 10000,
-                        child: Image(
-                          image: AssetImage("../images/record_2.png"),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Image.asset(
-                        "../images/Tonearm.png",
-                        height: 150,
-                      ),
-                    ),
-                    Text(MediaQuery.of(context).size.toString()),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      child: Stack(
-                        children: <Widget>[
-                          TurnBox(
-                            turns: kedovalue / 100,
-                            speed: 0,
-                            child: Image.asset(
-                              "../images/knob_light.png",
-                              height: 50,
-                            ),
-                          ),
-                          SleekCircularSlider(
-                            initialValue: _now.second.toDouble(),
-                            appearance: CircularSliderAppearance(
-                              angleRange: 240,
-                              startAngle: 270,
-                              size: 50,
-                              infoProperties: InfoProperties(),
-                            ),
-                            onChange: (double value) {
-                              kedovalue = value.toInt();
-                              setState(() {});
-                              print(kedovalue);
-                            },
-                          ),
-                          Text("$kedovalue"),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "../images/track.png",
-                          height: 120,
-                        ),
-                        Image.asset(
-                          "../images/track.png",
-                          height: 120,
-                        ),
-                        Image.asset(
-                          "../images/track.png",
-                          height: 120,
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
+            Positioned(
+              //唱片陰影
+              left: recordPlayerSize.width * 0.07,
+              top: recordPlayerSize.height * 0.1,
+              height: recordPlayerSize.height * 0.8,
+              child: Image(
+                image: AssetImage("../images/record_shadow.png"),
+              ),
             ),
+            Positioned(
+              //唱片
+              left: recordPlayerSize.width * 0.05,
+              top: recordPlayerSize.height * 0.1,
+              height: recordPlayerSize.height * 0.8,
+              child: TurnBox(
+                turns: _now.second * radiansPerTick,
+                speed: 10000,
+                child: Image(
+                  image: AssetImage("../images/record_2.png"),
+                ),
+              ),
+            ),
+            Positioned(
+              //指針
+              left: recordPlayerSize.width * 0.4,
+              top: recordPlayerSize.height * 0.05,
+              height: recordPlayerSize.height * 0.75,
+              child: Image.asset(
+                "../images/Tonearm.png",
+              ),
+            ),
+            Text('$recordPlayerSize'), ////////////////////
+            Text('\n' + MediaQuery.of(context).size.toString()), ///////////
+            Positioned(
+              //旋鈕
+              left: recordPlayerSize.width * 0.73,
+              top: recordPlayerSize.height * 0.05,
+              height: recordPlayerSize.height * 0.25,
+              child: Stack(
+                children: <Widget>[
+                  TurnBox(
+                    turns: kedovalue / 100,
+                    speed: 0,
+                    child: Image.asset(
+                      "../images/knob_light.png",
+                    ),
+                  ),
+                  SleekCircularSlider(
+                    initialValue: _now.second.toDouble(),
+                    appearance: CircularSliderAppearance(
+                      angleRange: 240,
+                      startAngle: 270,
+                      infoProperties: InfoProperties(),
+                    ),
+                    onChange: (double value) {
+                      kedovalue = value.toInt();
+                      setState(() {});
+                      print(kedovalue);
+                    },
+                  ),
+                  Text("$kedovalue"),
+                ],
+              ),
+            ),
+            Positioned(
+              //拉桿
+              left: recordPlayerSize.width * 0.7,
+              top: recordPlayerSize.height * 0.4,
+              width: recordPlayerSize.width * 0.2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Image.asset(
+                    "../images/track.png",
+                    height: recordPlayerSize.height * 0.5,
+                  ),
+                  Image.asset(
+                    "../images/track.png",
+                    height: recordPlayerSize.height * 0.5,
+                  ),
+                  Image.asset(
+                    "../images/track.png",
+                    height: recordPlayerSize.height * 0.5,
+                  ),
+                ],
+              ),
+            ),
+
             // Example of a hand drawn with [CustomPainter].
             // DrawnHand(
             //   color: customTheme.accentColor,
