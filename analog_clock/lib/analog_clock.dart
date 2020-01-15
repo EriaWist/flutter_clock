@@ -155,7 +155,7 @@ class _AnalogClockState extends State<AnalogClock> {
         child: Stack(
           children: [
             Image(
-              image: AssetImage("../images/background_light.png"),
+              image: AssetImage("images/background_light.png"),
             ),
             Positioned(
               //唱片陰影
@@ -163,7 +163,7 @@ class _AnalogClockState extends State<AnalogClock> {
               top: recordPlayerSize.height * 0.1,
               height: recordPlayerSize.height * 0.8,
               child: Image(
-                image: AssetImage("../images/record_shadow.png"),
+                image: AssetImage("images/record_shadow.png"),
               ),
             ),
             Positioned(
@@ -175,7 +175,7 @@ class _AnalogClockState extends State<AnalogClock> {
                 turns: _now.second * radiansPerTick,
                 speed: 10000,
                 child: Image(
-                  image: AssetImage("../images/record_light.png"),
+                  image: AssetImage("images/record_light.png"),
                 ),
               ),
             ),
@@ -204,7 +204,7 @@ class _AnalogClockState extends State<AnalogClock> {
               top: recordPlayerSize.height * 0.05,
               height: recordPlayerSize.height * 0.75,
               child: Image.asset(
-                "../images/Tonearm.png",
+                "images/Tonearm.png",
               ),
             ),
             Text('$recordPlayerSize'), ////////////////////
@@ -221,7 +221,7 @@ class _AnalogClockState extends State<AnalogClock> {
                     turns: kedovalue / 100,
                     speed: 0,
                     child: Image.asset(
-                      "../images/knob_light.png",
+                      "images/knob_light.png",
                     ),
                   ),
                   SleekCircularSlider(
@@ -266,14 +266,14 @@ class _AnalogClockState extends State<AnalogClock> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("../images/print.png"),
+                            image: AssetImage("images/print.png"),
                             fit: BoxFit.cover,
                           ),
                         ),
                         child: Text("20"),
                       ),
                       Image.asset(
-                        "../images/track.png",
+                        "images/track.png",
                         height: recordPlayerSize.height * 0.5,
                       ),
                     ],
@@ -296,14 +296,14 @@ class _AnalogClockState extends State<AnalogClock> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("../images/print.png"),
+                            image: AssetImage("images/print.png"),
                             fit: BoxFit.cover,
                           ),
                         ),
                         child: Text("01"),
                       ),
                       Image.asset(
-                        "../images/track.png",
+                        "images/track.png",
                         height: recordPlayerSize.height * 0.5,
                       ),
                     ],
@@ -317,14 +317,14 @@ class _AnalogClockState extends State<AnalogClock> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("../images/print.png"),
+                            image: AssetImage("images/print.png"),
                             fit: BoxFit.cover,
                           ),
                         ),
                         child: Text("15"),
                       ),
                       Image.asset(
-                        "../images/track.png",
+                        "images/track.png",
                         height: recordPlayerSize.height * 0.5,
                       ),
                     ],

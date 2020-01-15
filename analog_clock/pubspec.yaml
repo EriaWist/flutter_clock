@@ -21,9 +21,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - ../images/
+    - images/
     - assets/
   fonts:
     - family: CuteFont
       fonts:
-        - asset: ../fonts/CuteFont-Regular.ttf
+        - asset: fonts/CuteFont-Regular.ttf
