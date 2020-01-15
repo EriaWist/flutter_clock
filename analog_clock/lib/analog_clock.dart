@@ -225,12 +225,18 @@ class _AnalogClockState extends State<AnalogClock> {
                     ),
                   ),
                   SleekCircularSlider(
-                    initialValue: _now.second.toDouble(),
+                    initialValue: 0,
                     appearance: CircularSliderAppearance(
-                      angleRange: 240,
+                      angleRange: 270,
                       startAngle: 270,
                       size: recordPlayerSize.height * 0.25,
                       infoProperties: InfoProperties(),
+                      customColors: CustomSliderColors(
+                        dotColor: Colors.transparent,
+                        progressBarColor: Colors.transparent,
+                        trackColor: Colors.transparent,
+                        hideShadow: true,
+                      ),
                     ),
                     onChange: (double value) {
                       kedovalue = value.toInt();
