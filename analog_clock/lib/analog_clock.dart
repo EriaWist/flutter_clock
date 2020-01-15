@@ -112,7 +112,6 @@ class _AnalogClockState extends State<AnalogClock> {
     final hour =
         DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_now);
     final minute = DateFormat('mm').format(_now);
-    final fontSize = recordPlayerSize.width * 0.1;
 
     final customTheme = Theme.of(context).brightness == Brightness.light
         ? Theme.of(context).copyWith(
@@ -132,18 +131,18 @@ class _AnalogClockState extends State<AnalogClock> {
           );
 
     final time = DateFormat.Hms().format(DateTime.now());
-    final weatherInfo = DefaultTextStyle(
-      style: TextStyle(color: customTheme.primaryColor),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(_temperature),
-          Text(_temperatureRange),
-          Text(_condition),
-          Text(_location),
-        ],
-      ),
-    );
+    // final weatherInfo = DefaultTextStyle(
+    //   style: TextStyle(color: customTheme.primaryColor),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Text(_temperature),
+    //       Text(_temperatureRange),
+    //       Text(_condition),
+    //       Text(_location),
+    //     ],
+    //   ),
+    // );
 
     return Semantics.fromProperties(
       properties: SemanticsProperties(
@@ -181,12 +180,13 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
             Positioned(
+              //時間
               left: recordPlayerSize.width * 0.15,
               top: recordPlayerSize.height * 0.4,
               child: Text(
                 '$hour : $minute',
                 style: TextStyle(
-                  fontFamily: 'CuteFont',
+                  // fontFamily: 'CuteFont',
                   fontSize: recordPlayerSize.height * 0.15,
                   shadows: [
                     Shadow(
