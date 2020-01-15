@@ -43,7 +43,7 @@ class _AnalogClockState extends State<AnalogClock> {
   _getContainerSize() {
     RenderBox _recordPlayerSizeBox =
         _recordPlayerSizeKey.currentContext.findRenderObject();
-    print('$recordPlayerSize'); /////////////////
+    // print('$recordPlayerSize'); /////////////////
     recordPlayerSize = _recordPlayerSizeBox.size;
     setState(() {});
   }
@@ -91,7 +91,7 @@ class _AnalogClockState extends State<AnalogClock> {
       // Update once per second. Make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
       _timer = Timer(
-        Duration(seconds: 1) - Duration(milliseconds: _now.millisecond),
+        Duration(milliseconds: 10),
         _updateTime,
       );
     });
@@ -144,6 +144,12 @@ class _AnalogClockState extends State<AnalogClock> {
     //   ),
     // );
 
+    var nowSpeed = 0;
+    if (_now.second + _now.millisecond / 1000 < 0.01) {
+      nowSpeed = 0;
+    } else {
+      nowSpeed = 1000;
+    }
     return Semantics.fromProperties(
       properties: SemanticsProperties(
         label: 'Analog clock with time $time',
@@ -172,10 +178,10 @@ class _AnalogClockState extends State<AnalogClock> {
               top: recordPlayerSize.height * 0.1,
               height: recordPlayerSize.height * 0.8,
               child: TurnBox(
-                turns: _now.second * radiansPerTick,
-                speed: 10000,
+                turns: (_now.second + _now.millisecond / 1000) / 60.0,
+                speed: nowSpeed,
                 child: Image(
-                  image: AssetImage("images/record_light.png"),
+                  image: AssetImage("images/knob_light.png"),
                 ),
               ),
             ),
@@ -209,6 +215,10 @@ class _AnalogClockState extends State<AnalogClock> {
             ),
             Text('$recordPlayerSize'), ////////////////////
             Text('\n' + MediaQuery.of(context).size.toString()), ///////////
+            Text('\n' +
+                '\n' +
+                '${_now.second.toDouble() + _now.millisecond / 1000}    ' +
+                ' ${_now.second / 60}'), ////////////////////
             Positioned(
               //旋鈕
               left: recordPlayerSize.width * 0.73,
