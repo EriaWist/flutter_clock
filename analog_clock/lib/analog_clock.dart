@@ -182,12 +182,12 @@ class _AnalogClockState extends State<AnalogClock> {
             Positioned(
               //時間
               left: recordPlayerSize.width * 0.15,
-              top: recordPlayerSize.height * 0.4,
+              top: recordPlayerSize.height * 0.36,
               child: Text(
                 '$hour : $minute',
                 style: TextStyle(
-                  // fontFamily: 'CuteFont',
-                  fontSize: recordPlayerSize.height * 0.15,
+                  fontFamily: 'CuteFont',
+                  fontSize: recordPlayerSize.height * 0.2,
                   shadows: [
                     Shadow(
                       blurRadius: 0,
