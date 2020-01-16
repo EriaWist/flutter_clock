@@ -161,7 +161,10 @@ class _AnalogClockState extends State<AnalogClock> {
       child: Container(
         key: _recordPlayerSizeKey,
         // color: Colors.transparent,
-        decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+        // margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.red),
+        ),
         child: Stack(
           children: [
             Image(
@@ -304,7 +307,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             width: recordPlayerSize.width * 0.06,
                             alignment: Alignment.topCenter,
                             child: Image.asset(
-                              "images/track.png",
+                              "images/track_$imageTheme.png",
                               height: recordPlayerSize.height * 0.5,
                             ),
                           ),
@@ -353,7 +356,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             width: recordPlayerSize.width * 0.06,
                             alignment: Alignment.topCenter,
                             child: Image.asset(
-                              "images/track.png",
+                              "images/track_$imageTheme.png",
                               height: recordPlayerSize.height * 0.5,
                             ),
                           ),
@@ -392,7 +395,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             width: recordPlayerSize.width * 0.06,
                             alignment: Alignment.topCenter,
                             child: Image.asset(
-                              "images/track.png",
+                              "images/track_$imageTheme.png",
                               height: recordPlayerSize.height * 0.5,
                             ),
                           ),
