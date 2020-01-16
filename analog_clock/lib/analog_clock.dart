@@ -187,7 +187,7 @@ class _AnalogClockState extends State<AnalogClock> {
                 turns: (_now.second + _now.millisecond / 1000) / 60.0,
                 speed: nowSpeed,
                 child: Image(
-                  image: AssetImage("images/knob_$imageTheme.png"),
+                  image: AssetImage("images/record_$imageTheme.png"),
                   //AssetImage("images/record_light.png"),
                 ),
               ),
@@ -200,13 +200,15 @@ class _AnalogClockState extends State<AnalogClock> {
                 '$hour : $minute',
                 style: TextStyle(
                   fontFamily: 'CuteFont',
+                  color: Colors.red[400],
                   fontSize: recordPlayerSize.height * 0.2,
                   // color: Colors.red,
                   shadows: [
                     Shadow(
                       blurRadius: 0,
-                      color: Colors.grey,
-                      offset: Offset(5, 0),
+                      color: Colors.red[200],
+                     // offset: Offset(5, 0),
+                      offset: Offset(2, 0),
                     ),
                   ],
                 ),
