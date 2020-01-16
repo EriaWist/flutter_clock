@@ -314,7 +314,7 @@ class _AnalogClockState extends State<AnalogClock> {
                                 ((_now.year % 100 + 1) / 100),
                             child: Image.asset(
                               "images/fader_y_$imageTheme.png",
-                              height: recordPlayerSize.height * 0.06,
+                              width: recordPlayerSize.width * 0.06,
                             ),
                           )
                         ],
@@ -363,7 +363,7 @@ class _AnalogClockState extends State<AnalogClock> {
                                 (_now.month / 12),
                             child: Image.asset(
                               "images/fader_m_$imageTheme.png",
-                              height: recordPlayerSize.height * 0.06,
+                              width: recordPlayerSize.width * 0.06,
                             ),
                           )
                         ],
@@ -402,7 +402,7 @@ class _AnalogClockState extends State<AnalogClock> {
                                 (_now.day / 31),
                             child: Image.asset(
                               "images/fader_d_$imageTheme.png",
-                              height: recordPlayerSize.height * 0.06,
+                              width: recordPlayerSize.width * 0.06,
                             ),
                           )
                         ],
