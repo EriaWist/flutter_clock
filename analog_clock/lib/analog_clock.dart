@@ -145,10 +145,10 @@ class _AnalogClockState extends State<AnalogClock> {
     // );
 
     var nowSpeed = 0;
-    if (_now.second + _now.millisecond / 1000 < 0.01) {
+    if (_now.second + _now.millisecond / 1000 < 0.05) {
       nowSpeed = 0;
     } else {
-      nowSpeed = 1000;
+      nowSpeed = 800;
     }
     return Semantics.fromProperties(
       properties: SemanticsProperties(
@@ -280,7 +280,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Text("20"),
+                        child: Text("${_now.year % 100}"),
                       ),
                       Image.asset(
                         "images/track.png",
@@ -310,7 +310,9 @@ class _AnalogClockState extends State<AnalogClock> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Text("01"),
+                        child: Text(_now.month < 10
+                            ? "0${_now.month}"
+                            : "${_now.month}"),
                       ),
                       Image.asset(
                         "images/track.png",
@@ -331,7 +333,8 @@ class _AnalogClockState extends State<AnalogClock> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Text("15"),
+                        child: Text(
+                            _now.day < 10 ? "0${_now.day}" : "${_now.day}"),
                       ),
                       Image.asset(
                         "images/track.png",
