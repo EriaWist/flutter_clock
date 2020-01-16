@@ -131,20 +131,22 @@ class _AnalogClockState extends State<AnalogClock> {
             accentColor: Color(0xFF8AB4F8),
             backgroundColor: Color(0xFF3C4043),
           );
+    final imageTheme =
+        Theme.of(context).brightness == Brightness.light ? 'light' : 'dark';
 
     final time = DateFormat.Hms().format(DateTime.now());
-    // final weatherInfo = DefaultTextStyle(
-    //   style: TextStyle(color: customTheme.primaryColor),
-    //   child: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.start,
-    //     children: [
-    //       Text(_temperature),
-    //       Text(_temperatureRange),
-    //       Text(_condition),
-    //       Text(_location),
-    //     ],
-    //   ),
-    // );
+    final weatherInfo = DefaultTextStyle(
+      style: TextStyle(color: customTheme.primaryColor),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(_temperature),
+          Text(_temperatureRange),
+          Text(_condition),
+          Text(_location),
+        ],
+      ),
+    );
 
     if (_now.second + _now.millisecond / 1000 < 0.05) {
       nowSpeed = 0;
@@ -158,11 +160,15 @@ class _AnalogClockState extends State<AnalogClock> {
       ),
       child: Container(
         key: _recordPlayerSizeKey,
-        color: Colors.transparent,
+        // color: Colors.transparent,
+        // margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.red),
+        ),
         child: Stack(
           children: [
             Image(
-              image: AssetImage("images/background_light.png"),
+              image: AssetImage("images/background_$imageTheme.png"),
             ),
             Positioned(
               //唱片陰影
@@ -182,7 +188,8 @@ class _AnalogClockState extends State<AnalogClock> {
                 turns: (_now.second + _now.millisecond / 1000) / 60.0,
                 speed: nowSpeed,
                 child: Image(
-                  image: AssetImage("images/knob_light.png"),
+                  image: AssetImage("images/knob_$imageTheme.png"),
+                  //AssetImage("images/record_light.png"),
                 ),
               ),
             ),
@@ -195,6 +202,7 @@ class _AnalogClockState extends State<AnalogClock> {
                 style: TextStyle(
                   fontFamily: 'CuteFont',
                   fontSize: recordPlayerSize.height * 0.2,
+                  // color: Colors.red,
                   shadows: [
                     Shadow(
                       blurRadius: 0,
@@ -226,7 +234,7 @@ class _AnalogClockState extends State<AnalogClock> {
               top: recordPlayerSize.height * 0.05,
               height: recordPlayerSize.height * 0.25,
               child: Image(
-                image: AssetImage("images/knob_shadow_light.png"),
+                image: AssetImage("images/knob_shadow_$imageTheme.png"),
               ),
             ),
             Positioned(
@@ -241,7 +249,7 @@ class _AnalogClockState extends State<AnalogClock> {
                     turns: kedovalue / 100,
                     speed: 0,
                     child: Image.asset(
-                      "images/knob_light.png",
+                      "images/knob_$imageTheme.png",
                     ),
                   ),
                   SleekCircularSlider(
@@ -299,7 +307,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             width: recordPlayerSize.width * 0.06,
                             alignment: Alignment.topCenter,
                             child: Image.asset(
-                              "images/track.png",
+                              "images/track_$imageTheme.png",
                               height: recordPlayerSize.height * 0.5,
                             ),
                           ),
@@ -308,8 +316,8 @@ class _AnalogClockState extends State<AnalogClock> {
                                 0.425 *
                                 ((_now.year % 100 + 1) / 100),
                             child: Image.asset(
-                              "images/fader_y_light.png",
-                              height: recordPlayerSize.height * 0.06,
+                              "images/fader_y_$imageTheme.png",
+                              width: recordPlayerSize.width * 0.06,
                             ),
                           )
                         ],
@@ -348,7 +356,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             width: recordPlayerSize.width * 0.06,
                             alignment: Alignment.topCenter,
                             child: Image.asset(
-                              "images/track.png",
+                              "images/track_$imageTheme.png",
                               height: recordPlayerSize.height * 0.5,
                             ),
                           ),
@@ -357,8 +365,8 @@ class _AnalogClockState extends State<AnalogClock> {
                                 0.4 *
                                 (_now.month / 12),
                             child: Image.asset(
-                              "images/fader_m_light.png",
-                              height: recordPlayerSize.height * 0.06,
+                              "images/fader_m_$imageTheme.png",
+                              width: recordPlayerSize.width * 0.06,
                             ),
                           )
                         ],
@@ -387,7 +395,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             width: recordPlayerSize.width * 0.06,
                             alignment: Alignment.topCenter,
                             child: Image.asset(
-                              "images/track.png",
+                              "images/track_$imageTheme.png",
                               height: recordPlayerSize.height * 0.5,
                             ),
                           ),
@@ -396,8 +404,8 @@ class _AnalogClockState extends State<AnalogClock> {
                                 0.425 *
                                 (_now.day / 31),
                             child: Image.asset(
-                              "images/fader_d_light.png",
-                              height: recordPlayerSize.height * 0.06,
+                              "images/fader_d_$imageTheme.png",
+                              width: recordPlayerSize.width * 0.06,
                             ),
                           )
                         ],
