@@ -151,7 +151,7 @@ class _AnalogClockState extends State<AnalogClock> {
     if (_now.second + _now.millisecond / 1000 < 0.05) {
       nowSpeed = 0;
     } else {
-      nowSpeed = 800;
+      nowSpeed = 500;
     }
     return Semantics.fromProperties(
       properties: SemanticsProperties(
