@@ -217,7 +217,7 @@ class _AnalogClockState extends State<AnalogClock> {
             Text('\n' + MediaQuery.of(context).size.toString()), ///////////
             Text('\n' +
                 '\n' +
-                '${_now.second.toDouble() + _now.millisecond / 1000}    ' +
+                '${_now.second + _now.millisecond / 1000}    ' +
                 ' ${_now.second / 60}'), ////////////////////
             Positioned(
               //旋鈕陰影
@@ -280,8 +280,8 @@ class _AnalogClockState extends State<AnalogClock> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Container(
+                        width: recordPlayerSize.width * 0.06,
                         height: recordPlayerSize.height * 0.08,
-                        width: recordPlayerSize.height * 0.1,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -310,8 +310,8 @@ class _AnalogClockState extends State<AnalogClock> {
                       //   ],
                       // ),
                       Container(
+                        width: recordPlayerSize.width * 0.06,
                         height: recordPlayerSize.height * 0.08,
-                        width: recordPlayerSize.height * 0.1,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -333,8 +333,8 @@ class _AnalogClockState extends State<AnalogClock> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Container(
+                        width: recordPlayerSize.width * 0.06,
                         height: recordPlayerSize.height * 0.08,
-                        width: recordPlayerSize.height * 0.1,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -345,37 +345,29 @@ class _AnalogClockState extends State<AnalogClock> {
                         child: Text(
                             _now.day < 10 ? "0${_now.day}" : "${_now.day}"),
                       ),
-                      Stack(
-                        children: <Widget>[
-                          Image.asset(
-                            "images/track.png",
-                            height: recordPlayerSize.height * 0.5,
-                          ),
-                          Positioned(
-                            top: recordPlayerSize.height * 0.5 * (10 / 31),
-                            child: Image.asset(
-                              "images/fader_d_light.png",
-                              height: recordPlayerSize.height * 0.05,
+                      Container(
+                        width: recordPlayerSize.width * 0.06,
+                        alignment: Alignment.topCenter,
+                        child: Stack(
+                          children: <Widget>[
+                            Image.asset(
+                              "images/track.png",
+                              height: recordPlayerSize.height * 0.5,
                             ),
-                          ),
-                        ],
+                            Positioned(
+                              // top:
+                              //     recordPlayerSize.height * 0.5 * (_now.day / 31),
+                              top: recordPlayerSize.height *
+                                  0.5 *
+                                  (0 / 31), /////
+                              child: Image.asset(
+                                "images/fader_d_light.png",
+                                height: recordPlayerSize.height * 0.06,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      // Container(
-                      //   height: recordPlayerSize.height * 0.5,
-
-                      //   // width: recordPlayerSize.height * 0.1,
-                      //   alignment: Alignment.center,
-                      //   decoration: BoxDecoration(
-                      //     image: DecorationImage(
-                      //       image: AssetImage("images/track.png"),
-                      //       fit: BoxFit.contain,
-                      //     ),
-                      //   ),
-                      //   child: Image.asset(
-                      //     "images/fader_d_light.png",
-                      //     height: recordPlayerSize.height * 0.05,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ],
