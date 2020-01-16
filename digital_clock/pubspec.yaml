@@ -25,5 +25,5 @@ flutter:
     - family: CuteFont
       fonts:
         - asset: ../fonts/CuteFont-Regular.ttf
-  assets:
-    - ../images/
+  # assets:
+  #   - ../images/

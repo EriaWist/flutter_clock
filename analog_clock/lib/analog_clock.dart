@@ -293,9 +293,26 @@ class _AnalogClockState extends State<AnalogClock> {
                         ),
                         child: Text("${_now.year % 100}"),
                       ),
-                      Image.asset(
-                        "images/track.png",
-                        height: recordPlayerSize.height * 0.5,
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            width: recordPlayerSize.width * 0.06,
+                            alignment: Alignment.topCenter,
+                            child: Image.asset(
+                              "images/track.png",
+                              height: recordPlayerSize.height * 0.5,
+                            ),
+                          ),
+                          Positioned(
+                            top: recordPlayerSize.height *
+                                0.425 *
+                                ((_now.year % 100 + 1) / 100),
+                            child: Image.asset(
+                              "images/fader_y_light.png",
+                              height: recordPlayerSize.height * 0.06,
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),
@@ -325,9 +342,26 @@ class _AnalogClockState extends State<AnalogClock> {
                             ? "0${_now.month}"
                             : "${_now.month}"),
                       ),
-                      Image.asset(
-                        "images/track.png",
-                        height: recordPlayerSize.height * 0.5,
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            width: recordPlayerSize.width * 0.06,
+                            alignment: Alignment.topCenter,
+                            child: Image.asset(
+                              "images/track.png",
+                              height: recordPlayerSize.height * 0.5,
+                            ),
+                          ),
+                          Positioned(
+                            top: recordPlayerSize.height *
+                                0.4 *
+                                (_now.month / 12),
+                            child: Image.asset(
+                              "images/fader_m_light.png",
+                              height: recordPlayerSize.height * 0.06,
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),
@@ -347,28 +381,26 @@ class _AnalogClockState extends State<AnalogClock> {
                         child: Text(
                             _now.day < 10 ? "0${_now.day}" : "${_now.day}"),
                       ),
-                      Container(
-                        width: recordPlayerSize.width * 0.06,
-                        alignment: Alignment.topCenter,
-                        child: Stack(
-                          children: <Widget>[
-                            Image.asset(
+                      Stack(
+                        children: <Widget>[
+                          Container(
+                            width: recordPlayerSize.width * 0.06,
+                            alignment: Alignment.topCenter,
+                            child: Image.asset(
                               "images/track.png",
                               height: recordPlayerSize.height * 0.5,
                             ),
-                            Positioned(
-                              // top:
-                              //     recordPlayerSize.height * 0.5 * (_now.day / 31),
-                              top: recordPlayerSize.height *
-                                  0.5 *
-                                  (0 / 31), /////
-                              child: Image.asset(
-                                "images/fader_d_light.png",
-                                height: recordPlayerSize.height * 0.06,
-                              ),
+                          ),
+                          Positioned(
+                            top: recordPlayerSize.height *
+                                0.425 *
+                                (_now.day / 31),
+                            child: Image.asset(
+                              "images/fader_d_light.png",
+                              height: recordPlayerSize.height * 0.06,
                             ),
-                          ],
-                        ),
+                          )
+                        ],
                       ),
                     ],
                   ),
