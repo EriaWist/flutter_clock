@@ -93,11 +93,10 @@ class _AnalogClockState extends State<AnalogClock> {
       // Update once per second. Make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
       _timer = Timer(
-        Duration(milliseconds: 1000),
+        Duration(seconds: 1),
         _updateTime,
       );
       _turns += (1 / 60); //<-------累加
-      print(_turns);
     });
   }
 
@@ -213,7 +212,7 @@ class _AnalogClockState extends State<AnalogClock> {
                     Shadow(
                       blurRadius: 0,
                       color: Colors.red[200],
-                     // offset: Offset(5, 0),
+                      // offset: Offset(5, 0),
                       offset: Offset(2, 0),
                     ),
                   ],
@@ -262,7 +261,7 @@ class _AnalogClockState extends State<AnalogClock> {
                   SleekCircularSlider(
                     initialValue: 0,
                     appearance: CircularSliderAppearance(
-                      angleRange: 350,
+                      angleRange: 300,
                       startAngle: 270,
                       size: recordPlayerSize.height * 0.25,
                       infoProperties: InfoProperties(),
