@@ -162,6 +162,7 @@ class _AnalogClockState extends State<AnalogClock> {
         key: _recordPlayerSizeKey,
         // color: Colors.transparent,
         // margin: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(vertical: 3),
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage("images/background_$imageTheme.png")),
