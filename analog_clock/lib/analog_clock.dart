@@ -153,270 +153,259 @@ class _AnalogClockState extends State<AnalogClock> {
     } else {
       nowSpeed = 800;
     }
-    return Semantics.fromProperties(
-      properties: SemanticsProperties(
-        label: 'Analog clock with time $time',
-        value: time,
+    return Container(
+      key: _recordPlayerSizeKey,
+      // color: Colors.transparent,
+      // margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("images/background_$imageTheme.png")),
       ),
-      child: Container(
-        key: _recordPlayerSizeKey,
-        // color: Colors.transparent,
-        // margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.red),
-        ),
-        child: Stack(
-          children: [
-            Image(
-              image: AssetImage("images/background_$imageTheme.png"),
+      child: Stack(
+        children: [
+          Positioned(
+            //唱片陰影
+            left: recordPlayerSize.width * 0.07,
+            top: recordPlayerSize.height * 0.1,
+            height: recordPlayerSize.height * 0.8,
+            child: Image(
+              image: AssetImage("images/record_shadow.png"),
             ),
-            Positioned(
-              //唱片陰影
-              left: recordPlayerSize.width * 0.07,
-              top: recordPlayerSize.height * 0.1,
-              height: recordPlayerSize.height * 0.8,
+          ),
+          Positioned(
+            //唱片
+            left: recordPlayerSize.width * 0.05,
+            top: recordPlayerSize.height * 0.1,
+            height: recordPlayerSize.height * 0.8,
+            child: TurnBox(
+              turns: (_now.second + _now.millisecond / 1000) / 60.0,
+              speed: nowSpeed,
               child: Image(
-                image: AssetImage("images/record_shadow.png"),
+                image: AssetImage("images/knob_$imageTheme.png"),
+                //AssetImage("images/record_light.png"),
               ),
             ),
-            Positioned(
-              //唱片
-              left: recordPlayerSize.width * 0.05,
-              top: recordPlayerSize.height * 0.1,
-              height: recordPlayerSize.height * 0.8,
-              child: TurnBox(
-                turns: (_now.second + _now.millisecond / 1000) / 60.0,
-                speed: nowSpeed,
-                child: Image(
-                  image: AssetImage("images/knob_$imageTheme.png"),
-                  //AssetImage("images/record_light.png"),
+          ),
+          Positioned(
+            //時間
+            left: recordPlayerSize.width * 0.15,
+            top: recordPlayerSize.height * 0.36,
+            child: Text(
+              '$hour : $minute',
+              style: TextStyle(
+                fontFamily: 'CuteFont',
+                fontSize: recordPlayerSize.height * 0.2,
+                // color: Colors.red,
+                shadows: [
+                  Shadow(
+                    blurRadius: 0,
+                    color: Colors.grey,
+                    offset: Offset(5, 0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            //指針
+            left: recordPlayerSize.width * 0.4,
+            top: recordPlayerSize.height * 0.05,
+            height: recordPlayerSize.height * 0.75,
+            child: Image.asset(
+              "images/Tonearm.png",
+            ),
+          ),
+          Text('$recordPlayerSize'), ////////////////////
+          Text('\n' + MediaQuery.of(context).size.toString()), ///////////
+          Text('\n' +
+              '\n' +
+              '${_now.second + _now.millisecond / 1000}    ' +
+              ' ${_now.second / 60}'), ////////////////////
+          Positioned(
+            //旋鈕陰影
+            left: recordPlayerSize.width * 0.74,
+            top: recordPlayerSize.height * 0.05,
+            height: recordPlayerSize.height * 0.25,
+            child: Image(
+              image: AssetImage("images/knob_shadow_$imageTheme.png"),
+            ),
+          ),
+          Positioned(
+            //旋鈕
+            left: recordPlayerSize.width * 0.73,
+            top: recordPlayerSize.height * 0.05,
+            height: recordPlayerSize.height * 0.25,
+            child: Stack(
+              // alignment: AlignmentDirectional.topStart,
+              children: <Widget>[
+                TurnBox(
+                  turns: kedovalue / 100,
+                  speed: 0,
+                  child: Image.asset(
+                    "images/knob_$imageTheme.png",
+                  ),
                 ),
-              ),
+                SleekCircularSlider(
+                  initialValue: 0,
+                  appearance: CircularSliderAppearance(
+                    angleRange: 350,
+                    startAngle: 270,
+                    size: recordPlayerSize.height * 0.25,
+                    infoProperties: InfoProperties(),
+                    customColors: CustomSliderColors(
+                      dotColor: Colors.transparent,
+                      progressBarColor: Colors.transparent,
+                      trackColor: Colors.transparent,
+                      hideShadow: true,
+                    ),
+                  ),
+                  onChange: (double value) {
+                    kedovalue = value.toInt();
+                    setState(() {});
+                    VolumeWatcher.setVolume(value / 10);
+                    print(kedovalue);
+                  },
+                ),
+                Text("$kedovalue"),
+              ],
             ),
-            Positioned(
-              //時間
-              left: recordPlayerSize.width * 0.15,
-              top: recordPlayerSize.height * 0.36,
-              child: Text(
-                '$hour : $minute',
-                style: TextStyle(
-                  fontFamily: 'CuteFont',
-                  fontSize: recordPlayerSize.height * 0.2,
-                  // color: Colors.red,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 0,
-                      color: Colors.grey,
-                      offset: Offset(5, 0),
+          ),
+          Positioned(
+            //拉桿
+            left: recordPlayerSize.width * 0.7,
+            top: recordPlayerSize.height * 0.35,
+            width: recordPlayerSize.width * 0.2,
+            height: recordPlayerSize.height * 0.6,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: recordPlayerSize.width * 0.06,
+                      height: recordPlayerSize.height * 0.08,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("images/print.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Text("${_now.year % 100}"),
+                    ),
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          width: recordPlayerSize.width * 0.06,
+                          alignment: Alignment.topCenter,
+                          child: Image.asset(
+                            "images/track_$imageTheme.png",
+                            height: recordPlayerSize.height * 0.5,
+                          ),
+                        ),
+                        Positioned(
+                          top: recordPlayerSize.height *
+                              0.425 *
+                              ((_now.year % 100 + 1) / 100),
+                          child: Image.asset(
+                            "images/fader_y_$imageTheme.png",
+                            width: recordPlayerSize.width * 0.06,
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
-              ),
-            ),
-            Positioned(
-              //指針
-              left: recordPlayerSize.width * 0.4,
-              top: recordPlayerSize.height * 0.05,
-              height: recordPlayerSize.height * 0.75,
-              child: Image.asset(
-                "images/Tonearm.png",
-              ),
-            ),
-            Text('$recordPlayerSize'), ////////////////////
-            Text('\n' + MediaQuery.of(context).size.toString()), ///////////
-            Text('\n' +
-                '\n' +
-                '${_now.second + _now.millisecond / 1000}    ' +
-                ' ${_now.second / 60}'), ////////////////////
-            Positioned(
-              //旋鈕陰影
-              left: recordPlayerSize.width * 0.74,
-              top: recordPlayerSize.height * 0.05,
-              height: recordPlayerSize.height * 0.25,
-              child: Image(
-                image: AssetImage("images/knob_shadow_$imageTheme.png"),
-              ),
-            ),
-            Positioned(
-              //旋鈕
-              left: recordPlayerSize.width * 0.73,
-              top: recordPlayerSize.height * 0.05,
-              height: recordPlayerSize.height * 0.25,
-              child: Stack(
-                // alignment: AlignmentDirectional.topStart,
-                children: <Widget>[
-                  TurnBox(
-                    turns: kedovalue / 100,
-                    speed: 0,
-                    child: Image.asset(
-                      "images/knob_$imageTheme.png",
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    // Stack(
+                    //   children: <Widget>[
+                    //     Image.asset(
+                    //       "../images/print.png",
+                    //       height: recordPlayerSize.height * 0.08,
+                    //     ),
+                    //     Text("01"),
+                    //   ],
+                    // ),
+                    Container(
+                      width: recordPlayerSize.width * 0.06,
+                      height: recordPlayerSize.height * 0.08,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("images/print.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Text(
+                          _now.month < 10 ? "0${_now.month}" : "${_now.month}"),
                     ),
-                  ),
-                  SleekCircularSlider(
-                    initialValue: 0,
-                    appearance: CircularSliderAppearance(
-                      angleRange: 350,
-                      startAngle: 270,
-                      size: recordPlayerSize.height * 0.25,
-                      infoProperties: InfoProperties(),
-                      customColors: CustomSliderColors(
-                        dotColor: Colors.transparent,
-                        progressBarColor: Colors.transparent,
-                        trackColor: Colors.transparent,
-                        hideShadow: true,
-                      ),
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          width: recordPlayerSize.width * 0.06,
+                          alignment: Alignment.topCenter,
+                          child: Image.asset(
+                            "images/track_$imageTheme.png",
+                            height: recordPlayerSize.height * 0.5,
+                          ),
+                        ),
+                        Positioned(
+                          top:
+                              recordPlayerSize.height * 0.4 * (_now.month / 12),
+                          child: Image.asset(
+                            "images/fader_m_$imageTheme.png",
+                            width: recordPlayerSize.width * 0.06,
+                          ),
+                        )
+                      ],
                     ),
-                    onChange: (double value) {
-                      kedovalue = value.toInt();
-                      setState(() {});
-                      VolumeWatcher.setVolume(value / 10);
-                      print(kedovalue);
-                    },
-                  ),
-                  Text("$kedovalue"),
-                ],
-              ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: recordPlayerSize.width * 0.06,
+                      height: recordPlayerSize.height * 0.08,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("images/print.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child:
+                          Text(_now.day < 10 ? "0${_now.day}" : "${_now.day}"),
+                    ),
+                    Stack(
+                      children: <Widget>[
+                        Container(
+                          width: recordPlayerSize.width * 0.06,
+                          alignment: Alignment.topCenter,
+                          child: Image.asset(
+                            "images/track_$imageTheme.png",
+                            height: recordPlayerSize.height * 0.5,
+                          ),
+                        ),
+                        Positioned(
+                          top:
+                              recordPlayerSize.height * 0.425 * (_now.day / 31),
+                          child: Image.asset(
+                            "images/fader_d_$imageTheme.png",
+                            width: recordPlayerSize.width * 0.06,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Positioned(
-              //拉桿
-              left: recordPlayerSize.width * 0.7,
-              top: recordPlayerSize.height * 0.35,
-              width: recordPlayerSize.width * 0.2,
-              height: recordPlayerSize.height * 0.6,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        width: recordPlayerSize.width * 0.06,
-                        height: recordPlayerSize.height * 0.08,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("images/print.png"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Text("${_now.year % 100}"),
-                      ),
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                            width: recordPlayerSize.width * 0.06,
-                            alignment: Alignment.topCenter,
-                            child: Image.asset(
-                              "images/track_$imageTheme.png",
-                              height: recordPlayerSize.height * 0.5,
-                            ),
-                          ),
-                          Positioned(
-                            top: recordPlayerSize.height *
-                                0.425 *
-                                ((_now.year % 100 + 1) / 100),
-                            child: Image.asset(
-                              "images/fader_y_$imageTheme.png",
-                              width: recordPlayerSize.width * 0.06,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      // Stack(
-                      //   children: <Widget>[
-                      //     Image.asset(
-                      //       "../images/print.png",
-                      //       height: recordPlayerSize.height * 0.08,
-                      //     ),
-                      //     Text("01"),
-                      //   ],
-                      // ),
-                      Container(
-                        width: recordPlayerSize.width * 0.06,
-                        height: recordPlayerSize.height * 0.08,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("images/print.png"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Text(_now.month < 10
-                            ? "0${_now.month}"
-                            : "${_now.month}"),
-                      ),
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                            width: recordPlayerSize.width * 0.06,
-                            alignment: Alignment.topCenter,
-                            child: Image.asset(
-                              "images/track_$imageTheme.png",
-                              height: recordPlayerSize.height * 0.5,
-                            ),
-                          ),
-                          Positioned(
-                            top: recordPlayerSize.height *
-                                0.4 *
-                                (_now.month / 12),
-                            child: Image.asset(
-                              "images/fader_m_$imageTheme.png",
-                              width: recordPlayerSize.width * 0.06,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        width: recordPlayerSize.width * 0.06,
-                        height: recordPlayerSize.height * 0.08,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("images/print.png"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Text(
-                            _now.day < 10 ? "0${_now.day}" : "${_now.day}"),
-                      ),
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                            width: recordPlayerSize.width * 0.06,
-                            alignment: Alignment.topCenter,
-                            child: Image.asset(
-                              "images/track_$imageTheme.png",
-                              height: recordPlayerSize.height * 0.5,
-                            ),
-                          ),
-                          Positioned(
-                            top: recordPlayerSize.height *
-                                0.425 *
-                                (_now.day / 31),
-                            child: Image.asset(
-                              "images/fader_d_$imageTheme.png",
-                              width: recordPlayerSize.width * 0.06,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
