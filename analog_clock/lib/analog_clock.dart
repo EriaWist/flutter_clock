@@ -37,6 +37,7 @@ class _AnalogClockState extends State<AnalogClock> {
   var _condition = '';
   var _location = '';
   Timer _timer;
+  double _turns = DateTime.now().second / 60;
 
   Size recordPlayerSize = Size(0, 0);
   GlobalKey _recordPlayerSizeKey = GlobalKey();
@@ -92,14 +93,17 @@ class _AnalogClockState extends State<AnalogClock> {
       // Update once per second. Make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
       _timer = Timer(
-        Duration(milliseconds: 100),
+        Duration(milliseconds: 1000),
         _updateTime,
       );
+      _turns += (1 / 60); //<-------累加
+      print(_turns);
     });
   }
 
   var nowSpeed = 0;
   var kedovalue = 0;
+
   @override
   Widget build(BuildContext context) {
     // There are many ways to apply themes to your clock. Some are:
@@ -148,11 +152,13 @@ class _AnalogClockState extends State<AnalogClock> {
       ),
     );
 
-    if (_now.second + _now.millisecond / 1000 < 0.05) {
-      nowSpeed = 0;
-    } else {
-      nowSpeed = 500;
-    }
+    // if (_now.second + _now.millisecond / 1000 < 0.05) {
+    //   nowSpeed = 0;
+    // } else {
+    //   nowSpeed = 500;
+    // }
+    nowSpeed = 5000;
+
     return Semantics.fromProperties(
       properties: SemanticsProperties(
         label: 'Analog clock with time $time',
@@ -184,7 +190,7 @@ class _AnalogClockState extends State<AnalogClock> {
               top: recordPlayerSize.height * 0.1,
               height: recordPlayerSize.height * 0.8,
               child: TurnBox(
-                turns: (_now.second + _now.millisecond / 1000) / 60.0,
+                turns: _turns,
                 speed: nowSpeed,
                 child: Image(
                   image: AssetImage("images/knob_$imageTheme.png"),
