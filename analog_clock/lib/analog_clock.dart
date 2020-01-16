@@ -146,10 +146,10 @@ class _AnalogClockState extends State<AnalogClock> {
     // );
 
     var nowSpeed = 0;
-    if (_now.second + _now.millisecond / 1000 < 0.01) {
+    if (_now.second + _now.millisecond / 1000 < 0.05) {
       nowSpeed = 0;
     } else {
-      nowSpeed = 1000;
+      nowSpeed = 800;
     }
     return Semantics.fromProperties(
       properties: SemanticsProperties(
@@ -221,12 +221,21 @@ class _AnalogClockState extends State<AnalogClock> {
                 '${_now.second.toDouble() + _now.millisecond / 1000}    ' +
                 ' ${_now.second / 60}'), ////////////////////
             Positioned(
+              //旋鈕陰影
+              left: recordPlayerSize.width * 0.74,
+              top: recordPlayerSize.height * 0.05,
+              height: recordPlayerSize.height * 0.25,
+              child: Image(
+                image: AssetImage("images/knob_shadow_light.png"),
+              ),
+            ),
+            Positioned(
               //旋鈕
               left: recordPlayerSize.width * 0.73,
               top: recordPlayerSize.height * 0.05,
               height: recordPlayerSize.height * 0.25,
               child: Stack(
-                alignment: AlignmentDirectional.topStart,
+                // alignment: AlignmentDirectional.topStart,
                 children: <Widget>[
                   TurnBox(
                     turns: kedovalue / 100,
@@ -282,7 +291,7 @@ class _AnalogClockState extends State<AnalogClock> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Text("20"),
+                        child: Text("${_now.year % 100}"),
                       ),
                       Image.asset(
                         "images/track.png",
@@ -312,7 +321,9 @@ class _AnalogClockState extends State<AnalogClock> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Text("01"),
+                        child: Text(_now.month < 10
+                            ? "0${_now.month}"
+                            : "${_now.month}"),
                       ),
                       Image.asset(
                         "images/track.png",
@@ -333,12 +344,40 @@ class _AnalogClockState extends State<AnalogClock> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Text("15"),
+                        child: Text(
+                            _now.day < 10 ? "0${_now.day}" : "${_now.day}"),
                       ),
-                      Image.asset(
-                        "images/track.png",
-                        height: recordPlayerSize.height * 0.5,
+                      Stack(
+                        children: <Widget>[
+                          Image.asset(
+                            "images/track.png",
+                            height: recordPlayerSize.height * 0.5,
+                          ),
+                          Positioned(
+                            top: recordPlayerSize.height * 0.5 * (10 / 31),
+                            child: Image.asset(
+                              "images/fader_d_light.png",
+                              height: recordPlayerSize.height * 0.05,
+                            ),
+                          ),
+                        ],
                       ),
+                      // Container(
+                      //   height: recordPlayerSize.height * 0.5,
+
+                      //   // width: recordPlayerSize.height * 0.1,
+                      //   alignment: Alignment.center,
+                      //   decoration: BoxDecoration(
+                      //     image: DecorationImage(
+                      //       image: AssetImage("images/track.png"),
+                      //       fit: BoxFit.contain,
+                      //     ),
+                      //   ),
+                      //   child: Image.asset(
+                      //     "images/fader_d_light.png",
+                      //     height: recordPlayerSize.height * 0.05,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],
