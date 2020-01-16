@@ -98,6 +98,7 @@ class _AnalogClockState extends State<AnalogClock> {
     });
   }
 
+  var nowSpeed = 0;
   var kedovalue = 0;
   @override
   Widget build(BuildContext context) {
@@ -145,7 +146,6 @@ class _AnalogClockState extends State<AnalogClock> {
     //   ),
     // );
 
-    var nowSpeed = 0;
     if (_now.second + _now.millisecond / 1000 < 0.05) {
       nowSpeed = 0;
     } else {
