@@ -13,6 +13,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flukit: ^1.0.2
   sleek_circular_slider: ^1.0.7
+  volume_watcher: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -22,7 +23,6 @@ flutter:
   uses-material-design: true
   assets:
     - images/
-    - assets/
   fonts:
     - family: CuteFont
       fonts:

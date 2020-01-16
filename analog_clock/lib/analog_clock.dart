@@ -9,6 +9,7 @@ import 'package:flukit/flukit.dart';
 import 'container_hand.dart';
 import 'drawn_hand.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:volume_watcher/volume_watcher.dart';
 
 /// Total distance traveled by a second or a minute hand, each second or minute,
 /// respectively.
@@ -91,7 +92,7 @@ class _AnalogClockState extends State<AnalogClock> {
       // Update once per second. Make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
       _timer = Timer(
-        Duration(milliseconds: 10),
+        Duration(milliseconds: 100),
         _updateTime,
       );
     });
@@ -246,7 +247,7 @@ class _AnalogClockState extends State<AnalogClock> {
                   SleekCircularSlider(
                     initialValue: 0,
                     appearance: CircularSliderAppearance(
-                      angleRange: 270,
+                      angleRange: 350,
                       startAngle: 270,
                       size: recordPlayerSize.height * 0.25,
                       infoProperties: InfoProperties(),
@@ -260,6 +261,7 @@ class _AnalogClockState extends State<AnalogClock> {
                     onChange: (double value) {
                       kedovalue = value.toInt();
                       setState(() {});
+                      VolumeWatcher.setVolume(value / 10);
                       print(kedovalue);
                     },
                   ),
