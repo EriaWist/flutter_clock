@@ -228,12 +228,6 @@ class _AnalogClockState extends State<AnalogClock> {
                 "images/Tonearm.png",
               ),
             ),
-            Text('$recordPlayerSize'), ////////////////////
-            Text('\n' + MediaQuery.of(context).size.toString()), ///////////
-            Text('\n' +
-                '\n' +
-                '${_now.second + _now.millisecond / 1000}    ' +
-                ' ${_now.second / 60}'), ////////////////////
             Positioned(
               //旋鈕陰影
               left: recordPlayerSize.width * 0.74,
@@ -275,11 +269,10 @@ class _AnalogClockState extends State<AnalogClock> {
                     onChange: (double value) {
                       kedovalue = value.toInt();
                       setState(() {});
-                      VolumeWatcher.setVolume(value / 10);
+                      VolumeWatcher.setVolume(value / 100);
                       print(kedovalue);
                     },
                   ),
-                  Text("$kedovalue"),
                 ],
               ),
             ),
