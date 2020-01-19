@@ -36,6 +36,8 @@ class _AnalogClockState extends State<AnalogClock> {
   var _temperatureRange = '';
   var _condition = '';
   var _location = '';
+
+  bool isiOS = null; //判斷 ios和安卓
   Timer _timer;
   double _turns = DateTime.now().second / 60;
 
@@ -105,6 +107,10 @@ class _AnalogClockState extends State<AnalogClock> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS == null) {
+      isiOS = Theme.of(context).platform == TargetPlatform.iOS ? true : false;
+      print(isiOS);
+    }
     // There are many ways to apply themes to your clock. Some are:
     //  - Inherit the parent Theme (see ClockCustomizer in the
     //    flutter_clock_helper package).
@@ -269,7 +275,9 @@ class _AnalogClockState extends State<AnalogClock> {
                     onChange: (double value) {
                       kedovalue = value.toInt();
                       setState(() {});
-                      VolumeWatcher.setVolume(value / 100);
+                      VolumeWatcher.setVolume(isiOS == null
+                          ? value / 100
+                          : isiOS ? value / 100 : value / 10);
                       print(kedovalue);
                     },
                   ),
