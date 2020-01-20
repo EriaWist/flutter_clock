@@ -11,16 +11,10 @@ import 'drawn_hand.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:volume_watcher/volume_watcher.dart';
 
-/// Total distance traveled by a second or a minute hand, each second or minute,
-/// respectively.
 final radiansPerTick = radians(360 / 60);
 
-/// Total distance traveled by an hour hand, each hour, in radians.
 final radiansPerHour = radians(360 / 12);
 
-/// A basic analog clock.
-///
-/// You can do better than this!
 class AnalogClock extends StatefulWidget {
   const AnalogClock(this.model);
 
@@ -47,7 +41,6 @@ class _AnalogClockState extends State<AnalogClock> {
   _getContainerSize() {
     RenderBox _recordPlayerSizeBox =
         _recordPlayerSizeKey.currentContext.findRenderObject();
-    // print('$recordPlayerSize'); /////////////////
     recordPlayerSize = _recordPlayerSizeBox.size;
     setState(() {});
   }
@@ -56,7 +49,6 @@ class _AnalogClockState extends State<AnalogClock> {
   void initState() {
     super.initState();
     widget.model.addListener(_updateModel);
-    // Set the initial values.
 
     _updateTime();
     _updateModel();
@@ -92,13 +84,12 @@ class _AnalogClockState extends State<AnalogClock> {
   void _updateTime() {
     setState(() {
       _now = DateTime.now();
-      // Update once per second. Make sure to do it at the beginning of each
-      // new second, so that the clock is accurate.
       _timer = Timer(
         Duration(seconds: 1),
         _updateTime,
       );
-      _turns += (1 / 60); //<-------累加
+
+      _turns += (1 / 60);
     });
   }
 
@@ -111,13 +102,7 @@ class _AnalogClockState extends State<AnalogClock> {
       isiOS = Theme.of(context).platform == TargetPlatform.iOS ? true : false;
       print(isiOS);
     }
-    // There are many ways to apply themes to your clock. Some are:
-    //  - Inherit the parent Theme (see ClockCustomizer in the
-    //    flutter_clock_helper package).
-    //  - Override the Theme.of(context).colorScheme.
-    //  - Create your own [ThemeData], demonstrated in [AnalogClock].
-    //  - Create a map of [Color]s to custom keys, demonstrated in
-    //    [DigitalClock].
+
     WidgetsBinding.instance.addPostFrameCallback((_) => _getContainerSize());
 
     final hour =
@@ -171,8 +156,6 @@ class _AnalogClockState extends State<AnalogClock> {
       ),
       child: Container(
         key: _recordPlayerSizeKey,
-        // color: Colors.transparent,
-        // margin: EdgeInsets.all(10),
         margin: EdgeInsets.symmetric(vertical: 3),
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -199,7 +182,6 @@ class _AnalogClockState extends State<AnalogClock> {
                 speed: nowSpeed,
                 child: Image(
                   image: AssetImage("images/record_$imageTheme.png"),
-                  //AssetImage("images/record_light.png"),
                 ),
               ),
             ),
@@ -213,12 +195,10 @@ class _AnalogClockState extends State<AnalogClock> {
                   fontFamily: 'CuteFont',
                   color: Colors.red[400],
                   fontSize: recordPlayerSize.height * 0.2,
-                  // color: Colors.red,
                   shadows: [
                     Shadow(
                       blurRadius: 0,
                       color: Colors.red[200],
-                      // offset: Offset(5, 0),
                       offset: Offset(2, 0),
                     ),
                   ],
@@ -236,20 +216,19 @@ class _AnalogClockState extends State<AnalogClock> {
             ),
             Positioned(
               //旋鈕陰影
-              left: recordPlayerSize.width * 0.74,
-              top: recordPlayerSize.height * 0.05,
-              height: recordPlayerSize.height * 0.25,
+              left: recordPlayerSize.width * 0.75,
+              top: recordPlayerSize.height * 0.08,
+              height: recordPlayerSize.height * 0.2,
               child: Image(
                 image: AssetImage("images/knob_shadow_$imageTheme.png"),
               ),
             ),
             Positioned(
               //旋鈕
-              left: recordPlayerSize.width * 0.73,
-              top: recordPlayerSize.height * 0.05,
-              height: recordPlayerSize.height * 0.25,
+              left: recordPlayerSize.width * 0.74,
+              top: recordPlayerSize.height * 0.08,
+              height: recordPlayerSize.height * 0.2,
               child: Stack(
-                // alignment: AlignmentDirectional.topStart,
                 children: <Widget>[
                   TurnBox(
                     turns: kedovalue / 100,
@@ -334,15 +313,6 @@ class _AnalogClockState extends State<AnalogClock> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      // Stack(
-                      //   children: <Widget>[
-                      //     Image.asset(
-                      //       "../images/print.png",
-                      //       height: recordPlayerSize.height * 0.08,
-                      //     ),
-                      //     Text("01"),
-                      //   ],
-                      // ),
                       Container(
                         width: recordPlayerSize.width * 0.06,
                         height: recordPlayerSize.height * 0.08,
@@ -428,41 +398,3 @@ class _AnalogClockState extends State<AnalogClock> {
     );
   }
 }
-// Example of a hand drawn with [CustomPainter].
-// DrawnHand(
-//   color: customTheme.accentColor,
-//   thickness: 4,
-//   size: 1,
-//   angleRadians: _now.second * radiansPerTick,
-// ),
-// DrawnHand(
-//   color: customTheme.highlightColor,
-//   thickness: 16,
-//   size: 0.9,
-//   angleRadians: _now.minute * radiansPerTick,
-// ),
-// // Example of a hand drawn with [Container].
-// ContainerHand(
-//   color: Colors.transparent,
-//   size: 0.5,
-//   angleRadians: _now.hour * radiansPerHour +
-//       (_now.minute / 60) * radiansPerHour,
-//   child: Transform.translate(
-//     offset: Offset(0.0, -60.0),
-//     child: Container(
-//       width: 32,
-//       height: 150,
-//       decoration: BoxDecoration(
-//         color: customTheme.primaryColor,
-//       ),
-//     ),
-//   ),
-// ),
-// Positioned(
-//   left: 0,
-//   bottom: 0,
-//   child: Padding(
-//     padding: const EdgeInsets.all(8),
-//     child: weatherInfo,
-//   ),
-// ),
