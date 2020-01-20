@@ -6,8 +6,6 @@ import 'package:flutter/semantics.dart';
 import 'package:intl/intl.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 import 'package:flukit/flukit.dart';
-import 'container_hand.dart';
-import 'drawn_hand.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:volume_watcher/volume_watcher.dart';
 
@@ -129,6 +127,7 @@ class _AnalogClockState extends State<AnalogClock> {
         Theme.of(context).brightness == Brightness.light ? 'light' : 'dark';
 
     final time = DateFormat.Hms().format(DateTime.now());
+
     final weatherInfo = DefaultTextStyle(
       style: TextStyle(color: customTheme.primaryColor),
       child: Column(
